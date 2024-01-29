@@ -1,28 +1,21 @@
-// const sounds = [];
-// for (let i = 1; i <= 12; i++) {
-//     const audio = new Audio(`sounds/sound${i}.mp3`);
-//     sounds.push(audio);
-// }
+let firstClick = true;
 
-// function playSoundBasedOnPosition(x, y) {
-//     const screenWidth = window.innerWidth;
-//     const screenHeight = window.innerHeight;
-//     const squareWidth = screenWidth / 3;
-//     const squareHeight = screenHeight / 4;
+function createRipple(event) {
+    if (firstClick) {
+        var staticRippleText = document.getElementById('staticRippleText');
+        if (staticRippleText) {
+            staticRippleText.style.display = 'none';
+        }
+        firstClick = false;
+    }
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const isLandscape = screenWidth > screenHeight;
+    const size = isLandscape ? screenHeight : screenWidth;
 
-//     const column = Math.floor(x / squareWidth);
-//     const row = Math.floor(y / squareHeight);
-//     const soundIndex = row * 3 + column;
-
-//     console.log('hitting in', soundIndex);
-
-//     sounds[soundIndex].play();
-// }
-
-document.getElementById('screen').addEventListener('click', function(event) {
-    const intensity = Math.random() * 0.5 + 0.5; // Random intensity between 0.5 and 1
-    const color = `#${Math.floor(Math.random()*16777215).toString(16)}`; // Random color
-    const duration = 1 / intensity; // Duration based on intensity
+    const intensity = Math.random() * 0.5 + 0.5;
+    const color = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+    const duration = 1 / intensity;
 
     const circle = document.createElement('div');
     circle.classList.add('circle');
@@ -33,7 +26,7 @@ document.getElementById('screen').addEventListener('click', function(event) {
     circle.style.background = color;
     circle.style.animationDuration = `${duration}s`;
 
-    for (let i = 0; i < 3 + Math.floor(Math.random() * 4); i++) { // 3 to 6 ripples
+    for (let i = 0; i < 3 + Math.floor(Math.random() * 4); i++) {
         const ripple = document.createElement('div');
         ripple.classList.add('circle');
         ripple.style.left = `${event.clientX}px`;
@@ -42,17 +35,17 @@ document.getElementById('screen').addEventListener('click', function(event) {
         ripple.style.height = `0px`;
         ripple.style.border = `2px solid ${color}`;
         ripple.style.animationName = 'ripple';
-        ripple.style.animationDuration = `${duration + i * 0.1}s`; // Each ripple has a slight delay
+        ripple.style.animationDuration = `${duration + i * 0.1}s`;
         document.getElementById('screen').appendChild(ripple);
         setTimeout(() => ripple.remove(), (duration + i * 0.1) * 1000);
     }
 
     document.getElementById('screen').appendChild(circle);
     setTimeout(() => circle.remove(), duration * 1000);
-    //playSoundBasedOnPosition(event.clientX, event.clientY);
-});
+}
 
-// Fullscreen toggle on double tap
+document.getElementById('screen').addEventListener('click', createRipple);
+
 document.getElementById('screen').addEventListener('dblclick', function() {
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();

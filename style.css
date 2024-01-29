@@ -22,6 +22,18 @@ html {
   animation-name: fadeOut;
 }
 
+
+#staticRippleText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4em;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
 @keyframes fadeOut {
   to {
     opacity: 0;
