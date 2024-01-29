@@ -1,23 +1,23 @@
-const sounds = [];
-for (let i = 1; i <= 12; i++) {
-    const audio = new Audio(`sounds/sound${i}.mp3`);
-    sounds.push(audio);
-}
+// const sounds = [];
+// for (let i = 1; i <= 12; i++) {
+//     const audio = new Audio(`sounds/sound${i}.mp3`);
+//     sounds.push(audio);
+// }
 
-function playSoundBasedOnPosition(x, y) {
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const squareWidth = screenWidth / 3;
-    const squareHeight = screenHeight / 4;
+// function playSoundBasedOnPosition(x, y) {
+//     const screenWidth = window.innerWidth;
+//     const screenHeight = window.innerHeight;
+//     const squareWidth = screenWidth / 3;
+//     const squareHeight = screenHeight / 4;
 
-    const column = Math.floor(x / squareWidth);
-    const row = Math.floor(y / squareHeight);
-    const soundIndex = row * 3 + column;
+//     const column = Math.floor(x / squareWidth);
+//     const row = Math.floor(y / squareHeight);
+//     const soundIndex = row * 3 + column;
 
-    console.log('hitting in', soundIndex);
+//     console.log('hitting in', soundIndex);
 
-    sounds[soundIndex].play();
-}
+//     sounds[soundIndex].play();
+// }
 
 document.getElementById('screen').addEventListener('click', function(event) {
     const intensity = Math.random() * 0.5 + 0.5; // Random intensity between 0.5 and 1
@@ -49,7 +49,7 @@ document.getElementById('screen').addEventListener('click', function(event) {
 
     document.getElementById('screen').appendChild(circle);
     setTimeout(() => circle.remove(), duration * 1000);
-    playSoundBasedOnPosition(event.clientX, event.clientY);
+    //playSoundBasedOnPosition(event.clientX, event.clientY);
 });
 
 // Fullscreen toggle on double tap
